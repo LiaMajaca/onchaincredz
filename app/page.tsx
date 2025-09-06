@@ -125,16 +125,7 @@ export default function App() {
               
               <div className="flex justify-center mb-8">
                 <Wallet className="z-10">
-                  <ConnectWallet>
-                    <button
-                      className="bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] hover:from-[var(--app-accent-hover)] hover:to-[var(--app-accent-active)] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--app-accent)]"
-                      onClick={() => setIsConnecting(true)}
-                      disabled={isConnecting}
-                      aria-busy={isConnecting}
-                    >
-                      {isConnecting ? "Connecting…" : "Connect Wallet"}
-                    </button>
-                  </ConnectWallet>
+                  <ConnectWallet />
                   <WalletDropdown>
                     <Identity className="px-4 pt-3 pb-2" hasCopyAddressOnClick>
                       <Avatar />
