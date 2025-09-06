@@ -5,32 +5,42 @@
 @tailwind utilities;
 
 :root {
-  --app-background: #ffffff;
-  --app-foreground: #111111;
-  --app-foreground-muted: #58585c;
-  --app-accent: #0052ff;
-  --app-accent-hover: #0047e1;
-  --app-accent-active: #003db8;
-  --app-accent-light: #e6edff;
-  --app-gray: #f5f5f5;
-  --app-gray-dark: #e0e0e0;
-  --app-card-bg: rgba(255, 255, 255, 0.4);
-  --app-card-border: rgba(0, 0, 0, 0.1);
+  --app-background: #fafafa;
+  --app-foreground: #1a1a1a;
+  --app-foreground-muted: #6b7280;
+  --app-accent: #3b82f6;
+  --app-accent-hover: #2563eb;
+  --app-accent-active: #1d4ed8;
+  --app-accent-light: #dbeafe;
+  --app-gray: #f3f4f6;
+  --app-gray-dark: #e5e7eb;
+  --app-gray-light: #f9fafb;
+  --app-card-bg: rgba(255, 255, 255, 0.8);
+  --app-card-border: rgba(0, 0, 0, 0.08);
+  --app-success: #10b981;
+  --app-success-light: #d1fae5;
+  --app-warning: #f59e0b;
+  --app-warning-light: #fef3c7;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --app-background: #111111;
-    --app-foreground: #ffffff;
-    --app-foreground-muted: #c8c8d1;
-    --app-accent: #0052ff;
-    --app-accent-hover: #0047e1;
-    --app-accent-active: #003db8;
-    --app-accent-light: #1e293b;
-    --app-gray: #1e1e1e;
-    --app-gray-dark: #2e2e2e;
-    --app-card-bg: rgba(17, 17, 17, 0.4);
-    --app-card-border: rgba(115, 115, 115, 0.5);
+    --app-background: #0f0f0f;
+    --app-foreground: #fafafa;
+    --app-foreground-muted: #a1a1aa;
+    --app-accent: #3b82f6;
+    --app-accent-hover: #2563eb;
+    --app-accent-active: #1d4ed8;
+    --app-accent-light: #1e3a8a;
+    --app-gray: #1f1f1f;
+    --app-gray-dark: #2a2a2a;
+    --app-gray-light: #171717;
+    --app-card-bg: rgba(31, 31, 31, 0.8);
+    --app-card-border: rgba(255, 255, 255, 0.1);
+    --app-success: #10b981;
+    --app-success-light: #064e3b;
+    --app-warning: #f59e0b;
+    --app-warning-light: #451a03;
   }
 }
 
@@ -134,4 +144,72 @@ body {
   100% {
     opacity: 0;
   }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.4s ease-out;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.gradient-border {
+  position: relative;
+  background: var(--app-card-bg);
+  border-radius: 12px;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--app-accent), var(--app-accent-hover));
+  border-radius: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
 }
