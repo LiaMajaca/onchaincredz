@@ -1,0 +1,20 @@
+{
+    "frame": {
+      "name": "OnChainCredz",
+      "version": "1",
+      "iconUrl": "https://onchaincredz.vercel.app/icon.png",
+      "homeUrl": "https://onchaincredz.vercel.app",
+      "imageUrl": "https://onchaincredz.vercel.app/image.png",
+      "splashImageUrl": "https://onchaincredz.vercel.app/splash.png",
+      "splashBackgroundColor": "#0A84FF",
+      "webhookUrl": "https://onchaincredz.vercel.app/api/webhook",
+      "subtitle": "Turn every event into a verifiable credential",
+      "description": "onChainCredz lets users claim and showcase digital badges for events like hackathons, workshops, and meetups. Each badge is tied to the user’s wallet on Base Layer-2, creating a verifiable, on-chain record of participation and skills. Perfect for attendees who want to track, share, and prove their achievements instantly.",
+      "primaryCategory": "utility"
+    },
+    "accountAssociation": {
+      "header": "eyJmaWQiOjEzMjYzNTAsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhFNGU5RjZFMzE5NDdlN2Y3MzcxREE4MzA0YzkxNTk1RGVDRTJFQTE1In0",
+      "payload": "eyJkb21haW4iOiJvbmNoYWluY3JlZHoudmVyY2VsLmFwcCJ9",
+      "signature": "MHg1MDM0ZDU4ZmM5Mzk3MjIxOTZkNjY2MDcyOTMyMGMwM2JjODdmNTk5N2I1OTU2OTFiMzMzZjEyOGRhYmFjODhlMTIwNTgzMDAwMzcwNjdiM2YyM2EwYmZjZDI2NTg3YTU0MTliMDhiYTFlMTBjZGIxMDUzYTBjYTRjMjFmYjNjYzFi"
+    }
+  }
