@@ -39,7 +39,7 @@ export default function BadgesPage() {
         <div className="w-full max-w-lg mx-auto px-6 py-12">
           <header className="text-center mb-12 animate-slide-in-up">
             <div className="mb-6">
-              <BadgeIcon className="w-20 h-20 mx-auto mb-4" />
+              <BadgeIcon className="w-20 h-20 mx-auto mb-4 rounded-full shadow-lg bg-[var(--app-accent-light)]" />
             </div>
             <h1 className="text-4xl font-bold text-[var(--app-foreground)] mb-3 bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] bg-clip-text text-transparent">
               My Badges
@@ -55,8 +55,7 @@ export default function BadgesPage() {
             </p>
             <Link 
               href="/"
-              className="bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] hover:from-[var(--app-accent-hover)] hover:to-[var(--app-accent-active)] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
-            >
+              className="bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] hover:from-[var(--app-accent-hover)] hover:to-[var(--app-accent-active)] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block focus:outline-none focus:ring-2 focus:ring-[var(--app-accent)]">
               Go to Home
             </Link>
           </div>
@@ -84,7 +83,7 @@ export default function BadgesPage() {
           {badges.length === 0 ? (
             <div className="glass-effect rounded-2xl shadow-xl border border-[var(--app-card-border)] p-8 text-center animate-fade-in-scale">
               <div className="mb-6">
-                <div className="w-24 h-24 mx-auto mb-4 bg-[var(--app-accent-light)] rounded-full flex items-center justify-center">
+                <div className="w-24 h-24 mx-auto mb-4 bg-[var(--app-accent-light)] rounded-full flex items-center justify-center shadow-lg">
                   <BadgeIcon className="w-12 h-12" />
                 </div>
                 <h3 className="text-xl font-bold text-[var(--app-foreground)] mb-2">
@@ -96,8 +95,7 @@ export default function BadgesPage() {
               </div>
               <Link 
                 href="/"
-                className="bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] hover:from-[var(--app-accent-hover)] hover:to-[var(--app-accent-active)] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
-              >
+                className="bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] hover:from-[var(--app-accent-hover)] hover:to-[var(--app-accent-active)] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block focus:outline-none focus:ring-2 focus:ring-[var(--app-accent)]">
                 Go to Home
               </Link>
             </div>
@@ -113,28 +111,28 @@ export default function BadgesPage() {
                 {badges.map((badge, index) => (
                   <div 
                     key={index}
-                    className="gradient-border p-6 animate-fade-in-scale hover:shadow-xl transition-all duration-300"
+                    className="gradient-border p-6 animate-fade-in-scale hover:shadow-xl transition-all duration-300 rounded-2xl bg-[var(--app-card-bg)] border border-[var(--app-card-border)] flex flex-col md:flex-row items-center gap-6"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <div className="flex items-center space-x-6">
-                      <BadgeIcon className="w-20 h-20 flex-shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-xl font-bold text-[var(--app-foreground)] mb-2">
-                          {badge.event}
-                        </h3>
-                        <p className="text-[var(--app-foreground-muted)] text-sm mb-2">
-                          {new Date(badge.date).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                          })}
-                        </p>
-                        <p className="text-[var(--app-foreground-muted)] text-xs font-mono bg-[var(--app-gray)] px-3 py-1 rounded-full inline-block">
-                          {badge.wallet.slice(0, 6)}...{badge.wallet.slice(-4)}
-                        </p>
-                      </div>
+                    <div className="flex-shrink-0">
+                      <BadgeIcon className="w-20 h-20 rounded-full shadow-lg bg-[var(--app-accent-light)]" />
+                    </div>
+                    <div className="flex-1 min-w-0 text-center md:text-left">
+                      <h3 className="text-xl font-bold text-[var(--app-foreground)] mb-2">
+                        {badge.event}
+                      </h3>
+                      <p className="text-[var(--app-foreground-muted)] text-sm mb-2">
+                        {new Date(badge.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}
+                      </p>
+                      <p className="text-[var(--app-foreground-muted)] text-xs font-mono bg-[var(--app-gray)] px-3 py-1 rounded-full inline-block">
+                        {badge.wallet.slice(0, 6)}...{badge.wallet.slice(-4)}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -147,8 +145,7 @@ export default function BadgesPage() {
           <div className="text-center">
             <Link 
               href="/"
-              className="inline-flex items-center gap-2 text-[var(--app-accent)] hover:text-[var(--app-accent-hover)] font-medium transition-colors text-base"
-            >
+              className="inline-flex items-center gap-2 text-[var(--app-accent)] hover:text-[var(--app-accent-hover)] font-medium transition-colors text-base focus:outline-none focus:ring-2 focus:ring-[var(--app-accent)]">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>

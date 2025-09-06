@@ -32,12 +32,22 @@ export default function App() {
   const { setFrameReady, isFrameReady } = useMiniKit();
   const { address, isConnected } = useAccount();
   const [badgeClaimed, setBadgeClaimed] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     if (!isFrameReady) {
       setFrameReady();
     }
   }, [setFrameReady, isFrameReady]);
+
+  // Show toast for 2 seconds when badge is claimed
+  useEffect(() => {
+    if (showToast) {
+      const timer = setTimeout(() => setShowToast(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [showToast]);
 
   useEffect(() => {
     if (address) {
@@ -51,42 +61,59 @@ export default function App() {
 
   const handleClaimBadge = () => {
     if (!address) return;
-
     const newBadge: Badge = {
       wallet: address,
       event: "Base Hackathon 2025",
       date: new Date().toISOString(),
       image: "local-badge"
     };
-
     const existingBadges = localStorage.getItem(`badges_${address}`);
     const badges = existingBadges ? JSON.parse(existingBadges) : [];
-    
-    // Check if badge already exists for this event
-    const hasExistingBadge = badges.some((badge: Badge) => 
-      badge.event === newBadge.event && badge.wallet === address
-    );
-
+    const hasExistingBadge = badges.some((badge: Badge) => badge.event === newBadge.event && badge.wallet === address);
     if (!hasExistingBadge) {
       badges.push(newBadge);
       localStorage.setItem(`badges_${address}`, JSON.stringify(badges));
       setBadgeClaimed(true);
+      setShowToast(true);
     }
   };
 
   return (
     <div className="flex flex-col min-h-screen font-sans text-[var(--app-foreground)] mini-app-theme bg-gradient-to-br from-[var(--app-background)] via-[var(--app-gray-light)] to-[var(--app-gray)]">
       <div className="w-full max-w-lg mx-auto px-6 py-12">
+        {/* Toast for badge claim success */}
+        {showToast && (
+          <div role="alert" aria-live="assertive" className="fixed top-6 left-1/2 transform -translate-x-1/2 bg-[var(--app-accent)] text-white px-6 py-3 rounded-full shadow-lg z-50 text-sm font-semibold animate-fade-in-scale">
+            Badge claimed successfully!
+          </div>
+        )}
         <header className="text-center mb-12 animate-slide-in-up">
           <div className="mb-6">
-            <BadgeIcon className="w-20 h-20 mx-auto mb-4" />
+            <BadgeIcon className="w-20 h-20 mx-auto mb-4 rounded-full shadow-lg bg-[var(--app-accent-light)]" />
           </div>
-          <h1 className="text-4xl font-bold text-[var(--app-foreground)] mb-3 bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] bg-clip-text text-transparent">
-            Base MiniApp
+          <h1 className="text-4xl font-bold text-[var(--app-foreground)] mb-2 bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] bg-clip-text text-transparent">
+            OnchainCredz
           </h1>
-          <p className="text-lg text-[var(--app-foreground-muted)] max-w-md mx-auto leading-relaxed">
-            Connect your wallet and claim your exclusive hackathon badge
+          <h2 className="text-xl font-semibold text-[var(--app-accent)] mb-2">Your on-chain passport for events</h2>
+          <p className="text-base text-[var(--app-foreground-muted)] max-w-md mx-auto mb-4 leading-relaxed">
+            Claim and showcase digital badges for every event,Hackathon, Bootcamp, etc verifiable on Base Layer-2
           </p>
+          <div className="flex justify-center items-center gap-4 mt-6">
+            <div className="flex flex-col items-center">
+              <span className="text-[var(--app-accent)] font-bold">1</span>
+              <span className="text-sm text-[var(--app-foreground)]">Connect Wallet</span>
+            </div>
+            <span className="text-[var(--app-accent)] font-bold text-lg">→</span>
+            <div className="flex flex-col items-center">
+              <span className="text-[var(--app-accent)] font-bold">2</span>
+              <span className="text-sm text-[var(--app-foreground)]">Claim Badge</span>
+            </div>
+            <span className="text-[var(--app-accent)] font-bold text-lg">→</span>
+            <div className="flex flex-col items-center">
+              <span className="text-[var(--app-accent)] font-bold">3</span>
+              <span className="text-sm text-[var(--app-foreground)]">View Badges</span>
+            </div>
+          </div>
         </header>
 
         <main className="flex-1 space-y-8">
@@ -99,9 +126,14 @@ export default function App() {
               <div className="flex justify-center mb-8">
                 <Wallet className="z-10">
                   <ConnectWallet>
-                    <div className="bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] hover:from-[var(--app-accent-hover)] hover:to-[var(--app-accent-active)] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                      Connect Wallet
-                    </div>
+                    <button
+                      className="bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] hover:from-[var(--app-accent-hover)] hover:to-[var(--app-accent-active)] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--app-accent)]"
+                      onClick={() => setIsConnecting(true)}
+                      disabled={isConnecting}
+                      aria-busy={isConnecting}
+                    >
+                      {isConnecting ? "Connecting…" : "Connect Wallet"}
+                    </button>
                   </ConnectWallet>
                   <WalletDropdown>
                     <Identity className="px-4 pt-3 pb-2" hasCopyAddressOnClick>
@@ -143,8 +175,7 @@ export default function App() {
                     </p>
                     <Link 
                       href="/badges"
-                      className="bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] hover:from-[var(--app-accent-hover)] hover:to-[var(--app-accent-active)] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
-                    >
+                      className="bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] hover:from-[var(--app-accent-hover)] hover:to-[var(--app-accent-active)] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block focus:outline-none focus:ring-2 focus:ring-[var(--app-accent)]">
                       View My Badges
                     </Link>
                   </div>
@@ -158,8 +189,7 @@ export default function App() {
                     </div>
                     <button
                       onClick={handleClaimBadge}
-                      className="bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] hover:from-[var(--app-accent-hover)] hover:to-[var(--app-accent-active)] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                    >
+                      className="bg-gradient-to-r from-[var(--app-accent)] to-[var(--app-accent-hover)] hover:from-[var(--app-accent-hover)] hover:to-[var(--app-accent-active)] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--app-accent)]">
                       Claim Badge
                     </button>
                   </div>
@@ -172,7 +202,7 @@ export default function App() {
             <div className="text-center animate-fade-in-scale">
               <Link 
                 href="/badges"
-                className="inline-flex items-center gap-2 text-[var(--app-accent)] hover:text-[var(--app-accent-hover)] font-medium transition-colors text-base"
+                className="inline-flex items-center gap-2 text-[var(--app-accent)] hover:text-[var(--app-accent-hover)] font-medium transition-colors text-base focus:outline-none focus:ring-2 focus:ring-[var(--app-accent)]"
               >
                 View My Badges
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
