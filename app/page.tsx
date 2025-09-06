@@ -32,7 +32,6 @@ export default function App() {
   const { setFrameReady, isFrameReady } = useMiniKit();
   const { address, isConnected } = useAccount();
   const [badgeClaimed, setBadgeClaimed] = useState(false);
-  const [isConnecting, setIsConnecting] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
