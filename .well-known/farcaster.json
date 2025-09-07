@@ -1,9 +1,0 @@
-{
-  "name": "CredzonChain - Proof of Participation",
-  "description": "Claim and showcase digital badges for events on Base Layer-2. Your on-chain passport for hackathons, workshops, and more.",
-  "icon": "https://yourdomain.com/icon.png",
-  "url": "https://yourdomain.com",
-  "redirect_uris": ["https://yourdomain.com"],
-  "chains": ["base"],
-  "contact": "contact@yourdomain.com"
-}
