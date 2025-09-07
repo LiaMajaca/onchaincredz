@@ -11,5 +11,10 @@
     "subtitle": "Show up. Get recognized.",
     "description": "A Credly for events. Verify, collect, and showcase your attendance onchain.",
     "primaryCategory": "productivity"
+  },
+  "accountAssociation": {
+    "header": "eyJmaWQiOjEzMjYzNTAsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhFNGU5RjZFMzE5NDdlN2Y3MzcxREE4MzA0YzkxNTk1RGVDRTJFQTE1In0",
+    "payload": "eyJkb21haW4iOiJvbmNoYWluY3JlZHoudmVyY2VsLmFwcCJ9",
+    "signature": "MHg1MDM0ZDU4ZmM5Mzk3MjIxOTZkNjY2MDcyOTMyMGMwM2JjODdmNTk5N2I1OTU2OTFiMzMzZjEyOGRhYmFjODhlMTIwNTgzMDAwMzcwNjdiM2YyM2EwYmZjZDI2NTg3YTU0MTliMDhiYTFlMTBjZGIxMDUzYTBjYTRjMjFmYjNjYzFi"
   }
 }
