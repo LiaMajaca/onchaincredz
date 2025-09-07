@@ -44,21 +44,24 @@ export default function App() {
 
   const eventOptions = [
     "Python Workshop Day 1", 
-    "WeThinkCode Bootcamp",
     "AWS Summit", 
-    "Base Vibe Coding Hackathon", 
-    "Geekulcha  Hackathon", 
+    "WeThinkCode_ Bootcamp", 
+    "Base Vibe Coding hackathon", 
     "AI Fundamentals",
     "Data Science Basics",
-    "AI & Machine Learning",
-    "AVI Jozi",
+    "Geekulcha Hackathon",
     "Web3 Security Workshop"
   ];
   
   useEffect(() => {
-    if (!isFrameReady) {
-      setFrameReady();
-    }
+    // Ensure DOM is ready before calling setFrameReady
+    const timer = setTimeout(() => {
+      if (!isFrameReady) {
+        setFrameReady();
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [setFrameReady, isFrameReady]);
 
   // Load badges on wallet connection
@@ -98,7 +101,7 @@ export default function App() {
 
   const handleQrScan = () => {
     if (!selectedEvent) {
-      showToastMessage("Please select a training session first!");
+      showToastMessage("Please select a training session/event first!");
       return;
     }
 
@@ -223,7 +226,7 @@ export default function App() {
                       <div className="mb-6">
                         <BadgeIcon className="w-20 h-20 mx-auto mb-4" />
                         <p className="text-gray-600 text-base leading-relaxed">
-                          Select a training session and scan the QR code to earn your certificate
+                          Select a training session/event and scan the QR code to earn your badge
                         </p>
                       </div>
                       
@@ -249,7 +252,7 @@ export default function App() {
             {badges.length === 0 ? (
               <div className="text-center py-8">
                 <BadgeIcon className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                <p className="text-gray-500">No certificates earned yet</p>
+                <p className="text-gray-500">No badges earned yet</p>
                 <p className="text-sm text-gray-400 mt-2">Join training sessions to start earning!</p>
               </div>
             ) : (
@@ -284,7 +287,7 @@ export default function App() {
         {showQrModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-8 shadow-lg max-w-sm w-full mx-4">
-              <h3 className="text-xl font-bold text-center mb-6">Select Training Session</h3>
+              <h3 className="text-xl font-bold text-center mb-6">Select Training Session/event</h3>
               
               <div className="space-y-3 mb-6">
                 {eventOptions.map((event) => (

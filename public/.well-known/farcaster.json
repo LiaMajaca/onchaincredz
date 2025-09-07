@@ -1,0 +1,15 @@
+{
+  "frame": {
+    "name": "OnchainCredz",
+    "version": "1",
+    "iconUrl": "https://onchaincredz.vercel.app/icon.png",
+    "homeUrl": "https://onchaincredz.vercel.app",
+    "imageUrl": "https://onchaincredz.vercel.app/image.png",
+    "splashImageUrl": "https://onchaincredz.vercel.app/splash.png",
+    "splashBackgroundColor": "#f3f4f6",
+    "webhookUrl": "https://onchaincredz.vercel.app/api/webhook",
+    "subtitle": "Show up. Get recognized.",
+    "description": "A Credly for events. Verify, collect, and showcase your attendance onchain.",
+    "primaryCategory": "productivity"
+  }
+}
