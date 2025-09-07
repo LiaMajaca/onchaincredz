@@ -35,21 +35,20 @@ export default function App() {
   const { address, isConnected } = useAccount();
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
-  // const router = useRouter();
   const [qrScanning, setQrScanning] = useState(false);
   const [showQrModal, setShowQrModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState("");
   const [badges, setBadges] = useState<Badge[]>([]);
   const [showBadges, setShowBadges] = useState(false);
 
-  const eventOptions = [
-    "Python Workshop Day 1", 
+  const eventOptions = [ 
+    "Base Vibe Coding Hackathon", 
     "AWS Summit", 
-    "WeThinkCode_ Bootcamp", 
-    "Base Vibe Coding hackathon", 
+    "WeThinkCode Bootcamp",
+    "Google cloud Roadshow",
+    "Jozi.js Speaker",
     "AI Fundamentals",
-    "Data Science Basics",
-    "Geekulcha Hackathon",
+    "AVIJOZI",
     "Web3 Security Workshop"
   ];
   
@@ -101,7 +100,7 @@ export default function App() {
 
   const handleQrScan = () => {
     if (!selectedEvent) {
-      showToastMessage("Please select a training session/event first!");
+      showToastMessage("Please select a event first!");
       return;
     }
 
@@ -182,7 +181,7 @@ export default function App() {
                 Your Skills, Your Proof, Your Future
               </h1>
               <h2 className="text-lg text-gray-600 mb-4">
-                Attend workshops → Scan QR → Earn blockchain certificates → Land opportunities
+                Attend workshops/events → Scan QR → Earn blockchain certificates → Land opportunities
               </h2>
             </header>
 
@@ -209,7 +208,7 @@ export default function App() {
                   </div>
 
                   <p className="text-gray-600 text-sm leading-relaxed">
-                    Connect to start earning verified training certificates
+                    Connect to start earning verified Badges
                   </p>
                 </div>
               </div>
@@ -219,14 +218,14 @@ export default function App() {
                 <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200 p-8">
                   <div className="text-center">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                      Join Training Session
+                      Join Event
                     </h2>
                     
                     <div className="space-y-6">
                       <div className="mb-6">
                         <BadgeIcon className="w-20 h-20 mx-auto mb-4" />
                         <p className="text-gray-600 text-base leading-relaxed">
-                          Select a training session/event and scan the QR code to earn your badge
+                          Select a event and scan the QR code to earn your certificate
                         </p>
                       </div>
                       
@@ -234,7 +233,7 @@ export default function App() {
                         onClick={handleJoinTrainingSession}
                         className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
                       >
-                        Join Training Session
+                        Select Event & Scan QR
                       </button>
                     </div>
                   </div>
@@ -246,14 +245,14 @@ export default function App() {
           // MY BADGES TAB
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200 p-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-              My Training Certificates
+              My Badges
             </h2>
             
             {badges.length === 0 ? (
               <div className="text-center py-8">
                 <BadgeIcon className="w-16 h-16 mx-auto mb-4 opacity-50" />
                 <p className="text-gray-500">No badges earned yet</p>
-                <p className="text-sm text-gray-400 mt-2">Join training sessions to start earning!</p>
+                <p className="text-sm text-gray-400 mt-2">Join events to start earning!</p>
               </div>
             ) : (
               <div className="grid gap-4">
@@ -287,7 +286,7 @@ export default function App() {
         {showQrModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-8 shadow-lg max-w-sm w-full mx-4">
-              <h3 className="text-xl font-bold text-center mb-6">Select Training Session/event</h3>
+              <h3 className="text-xl font-bold text-center mb-6">Select Event</h3>
               
               <div className="space-y-3 mb-6">
                 {eventOptions.map((event) => (
@@ -309,8 +308,9 @@ export default function App() {
                 <div className="text-center mb-6">
                   <div className="w-32 h-32 bg-gray-100 border-4 border-blue-400 rounded-lg flex items-center justify-center mx-auto mb-4">
                     {qrScanning ? (
-                      <div className="animate-pulse">
-                        <div className="text-blue-500">Scanning...</div>
+                      <div className="text-center">
+                        <div className="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-2"></div>
+                        <div className="text-blue-500 text-sm">Scanning...</div>
                       </div>
                     ) : (
                       <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2">
